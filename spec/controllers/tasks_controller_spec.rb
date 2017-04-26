@@ -11,4 +11,11 @@ RSpec.describe TasksController, type: :controller do
                 expect(response_value.count).to eq(2)
             end
     end
+
+    describe "tasks#update" do
+        it "should allow tasks to be marked as done" do
+            task = FactoryGirl.create(:task, done: false)
+            put :update, id:task.id, task: {done:true}
+        end
+    end    
 end
