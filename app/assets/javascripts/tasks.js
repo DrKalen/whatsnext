@@ -31,27 +31,26 @@ $(function() {
              done: doneValue
             }
          }).success(function(data) {
-            var liHtml = taskHtml(data);
-            var $li = $("#listItem-" + data.id);
-            $li.replaceWith(liHtml);
-            $('.toggle').change(toggleTask);
+    		refetch();
          } );
       }
 
-    $.get("/tasks").success( function( data ) {
-        var htmlString = "";
+    // Create a full method to refetch tasks
+    function refetch() {
+        $.get("/tasks").success( function( data ) {
+            var htmlString = "";
 
-        $.each(data, function(index,  task) {
-            
-            htmlString += taskHtml(task);
-                   
+            $.each(data, function(index,  task) {
+                htmlString += taskHtml(task);   
+            });
+            var ulTodos = $('.todo-list');
+            ulTodos.html(htmlString);
+
+            $('.toggle').change(toggleTask);
+
         });
-        var ulTodos = $('.todo-list');
-        ulTodos.html(htmlString);
-
-        $('.toggle').change(toggleTask);
-
-    });
+    }
+  refetch();
 
         $('#new-form').submit(function(event) {
         event.preventDefault();
@@ -62,11 +61,7 @@ $(function() {
             }
         };
         $.post("/tasks", payload).success(function(data) {
-          var htmlString = taskHtml(data);
-          var ulTodos = $('.todo-list');
-          ulTodos.append(htmlString);
-          $('.toggle').click(toggleTask);
-          $('.new-todo').val('');
+		refetch();
         });
     });
 
