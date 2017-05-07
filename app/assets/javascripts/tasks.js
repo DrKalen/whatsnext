@@ -42,8 +42,9 @@ $(function() {
         var htmlString = "";
 
         $.each(data, function(index,  task) {
-          
+            
             htmlString += taskHtml(task);
+                   
         });
         var ulTodos = $('.todo-list');
         ulTodos.html(htmlString);
@@ -68,5 +69,63 @@ $(function() {
           $('.new-todo').val('');
         });
     });
+
+        $('.completed').click (function() {
+            $.get("/tasks").success( function( data ) {
+                var htmlString = "";
+
+                $.each(data, function(index,  task) {
+                    if(task.done) {
+                    htmlString += taskHtml(task);
+                    }       
+                });
+                var ulTodos = $('.todo-list');
+                ulTodos.html(htmlString);
+
+                $('.toggle').change(toggleTask);
+
+            });
+        }); 
+
+        $('.active').click (function() {
+            $.get("/tasks").success( function( data ) {
+                var htmlString = "";
+
+                $.each(data, function(index,  task) {
+                    if(task.done===false) {
+                    htmlString += taskHtml(task);
+                    }       
+                });
+                var ulTodos = $('.todo-list');
+                ulTodos.html(htmlString);
+
+                $('.toggle').change(toggleTask);
+
+            });
+        }); 
+
+        $('.all').click (function() {
+            $.get("/tasks").success( function( data ) {
+                var htmlString = "";
+
+                $.each(data, function(index,  task) {
+                    if(task.done===false) {
+                    htmlString += taskHtml(task);
+                    } 
+                    if(task.done) {
+                        htmlString += taskHtml(task);
+                    }              
+                });
+                var ulTodos = $('.todo-list');
+                ulTodos.html(htmlString);
+
+                $('.toggle').change(toggleTask);
+
+            });
+        }); 
+
+
+
+        
 
 });
