@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
     def index
-        render json: Task.order(:id)
+        # first order by done in Ascending order
+        # then order by id is descending order.
+        # Depending on the way you want the ordering to
+        # be, you may want to tweak these values.
+        render json: Task.order("done ASC, id DESC")
     end
 
     def update
