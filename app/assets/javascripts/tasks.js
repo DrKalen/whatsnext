@@ -63,6 +63,7 @@ $(function() {
         $.post("/tasks", payload).success(function(data) {
 		refetch();
         });
+        $('.new-todo').(val'')
     });
 
         $('.completed').click (function() {
