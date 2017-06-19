@@ -5,7 +5,7 @@
     * Single page mobile - responsive design
     * Fluid user interface with no need to refresh the page
     * Dynamic addition of new tasks
-    * Completed tasks indicates with strikethrough
+    * Completed tasks indicated with strikethrough
     * Dynamic task reordering puts completed tasks below active tasks
 * Technology:
     * Ruby on Rails  to create database (Basic MVC structure)
